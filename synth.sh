@@ -30,11 +30,13 @@ main() {
         done
     fi
 
-
+    top_module_name="${top_module%.*}"
+    echo $top_module
+    echo $top_module_name
 # スクリプトの内容
     script_content=$(cat <<EOF
 read_verilog $top_module ${modules[@]}
-synth_design -top $top_module -part xc7a100tcsg324-3
+synth_design -top $top_module_name -part xc7a100tcsg324-3
 report_utilization               -file report_utilization.txt
 report_utilization -hierarchical -file report_utilization-hierarchical.txt
 report_timing_summary -file report_timing.txt -report_unconstrained
